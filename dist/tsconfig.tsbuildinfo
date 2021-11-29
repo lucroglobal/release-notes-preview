@@ -338,11 +338,11 @@
         "signature": "dfa1b07ec47e1bbdb8b80f4eac4320a04330d2cce41cc13c028c87cbe6ab8a3d"
       },
       "../src/compose.ts": {
-        "version": "bca8b45ace798c7dbc94eb6206d7cda0aba1222e770497d98056d236d7253a25",
+        "version": "9bc85af2a6e897391b46eb7ffe0018ee05257c3940e12ff0c70f1eaf142a51d2",
         "signature": "a4926a5d72f5b3053cccf6dd6ba3f1f1d70431910de3e5890fc367554b98a7ed"
       },
       "../src/pull-request.ts": {
-        "version": "c399ec622f2b88f364a4b62c7f88b66c13dce8948e648be8612e98a882830b60",
+        "version": "b66ccc03f55351e79910502780d6bdc696ef1093698d704b55f206cb755b0b67",
         "signature": "81fa54f07a54731bb2a56bd17a1d1a487202ca33fa1592fa830ed383b74fa728"
       },
       "../src/issue-comment.ts": {
@@ -988,6 +988,7 @@
         "../src/comment.ts",
         "../src/commit.ts",
         "../src/compose.ts",
+        "../src/config.ts",
         "../src/commit-status.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
