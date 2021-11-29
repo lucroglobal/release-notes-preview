@@ -1319,8 +1319,9 @@ function previewFromCommits(commitsData) {
     if (commitsData.others.length > 0) {
         body += '\n_others (will not be included in Semantic-Release notes)_:\n' + commitsData.others.join('\n');
     }
-    // TODO probably make this configurable
-    body += '\n' + config.ACKNOWLEDGEMENT.UNCHECKED;
+    if (config.ACKNOWLEDGEMENT.ENABLED) {
+        body += '\n' + config.ACKNOWLEDGEMENT.UNCHECKED;
+    }
     return `${title}\n${body}`;
 }
 exports.previewFromCommits = previewFromCommits;
@@ -4202,7 +4203,7 @@ exports.write = writeCookieString;
 /***/ 360:
 /***/ (function(module) {
 
-module.exports = {"name":"needle","version":"2.4.0","description":"The leanest and most handsome HTTP client in the Nodelands.","keywords":["http","https","simple","request","client","multipart","upload","proxy","deflate","timeout","charset","iconv","cookie","redirect"],"tags":["http","https","simple","request","client","multipart","upload","proxy","deflate","timeout","charset","iconv","cookie","redirect"],"author":"Tomás Pollak <tomas@forkhq.com>","repository":{"type":"git","url":"https://github.com/tomas/needle.git"},"dependencies":{"debug":"^3.2.6","iconv-lite":"^0.4.4","sax":"^1.2.4"},"devDependencies":{"JSONStream":"^1.3.5","jschardet":"^1.6.0","mocha":"^5.2.0","q":"^1.5.1","should":"^13.2.3","sinon":"^2.3.0","xml2js":"^0.4.19"},"scripts":{"test":"mocha test"},"directories":{"lib":"./lib"},"main":"./lib/needle","bin":{"needle":"./bin/needle"},"license":"MIT","engines":{"node":">= 4.4.x"}};
+module.exports = {"_args":[["needle@2.4.0","/code"]],"_from":"needle@2.4.0","_id":"needle@2.4.0","_inBundle":false,"_integrity":"sha512-4Hnwzr3mi5L97hMYeNl8wRW/Onhy4nUKR/lVemJ8gJedxxUyBLm9kkrDColJvoSfwi0jCNhD+xCdOtiGDQiRZg==","_location":"/needle","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"needle@2.4.0","name":"needle","escapedName":"needle","rawSpec":"2.4.0","saveSpec":null,"fetchSpec":"2.4.0"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/needle/-/needle-2.4.0.tgz","_spec":"2.4.0","_where":"/code","author":{"name":"Tomás Pollak","email":"tomas@forkhq.com"},"bin":{"needle":"bin/needle"},"bugs":{"url":"https://github.com/tomas/needle/issues"},"dependencies":{"debug":"^3.2.6","iconv-lite":"^0.4.4","sax":"^1.2.4"},"description":"The leanest and most handsome HTTP client in the Nodelands.","devDependencies":{"JSONStream":"^1.3.5","jschardet":"^1.6.0","mocha":"^5.2.0","q":"^1.5.1","should":"^13.2.3","sinon":"^2.3.0","xml2js":"^0.4.19"},"directories":{"lib":"./lib"},"engines":{"node":">= 4.4.x"},"homepage":"https://github.com/tomas/needle#readme","keywords":["http","https","simple","request","client","multipart","upload","proxy","deflate","timeout","charset","iconv","cookie","redirect"],"license":"MIT","main":"./lib/needle","name":"needle","repository":{"type":"git","url":"git+https://github.com/tomas/needle.git"},"scripts":{"test":"mocha test"},"tags":["http","https","simple","request","client","multipart","upload","proxy","deflate","timeout","charset","iconv","cookie","redirect"],"version":"2.4.0"};
 
 /***/ }),
 
@@ -5565,6 +5566,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const comment = __webpack_require__(965);
 const commit = __webpack_require__(991);
 const compose = __webpack_require__(42);
+const config = __webpack_require__(145);
 const commit_status_1 = __webpack_require__(148);
 // TODO type
 async function handlePullRequest(eventObj) {
@@ -5578,7 +5580,9 @@ async function handlePullRequest(eventObj) {
         process.exit(0);
     }
     comment.postComment(issueUrl, message);
-    await commit_status_1.commitStatusPending(eventObj.pull_request.statuses_url);
+    if (config.ACKNOWLEDGEMENT.ENABLED) {
+        await commit_status_1.commitStatusPending(eventObj.pull_request.statuses_url);
+    }
 }
 exports.handlePullRequest = handlePullRequest;
 //# sourceMappingURL=pull-request.js.map
